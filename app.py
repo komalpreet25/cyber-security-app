@@ -97,6 +97,7 @@ elif st.session_state.page == "password":
             st.success("Strong Password ✅")
 
         st.write(f"Security Score: {score}/4")
+        st.markdown("💡 Tip: Use uppercase, numbers & symbols")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
@@ -105,6 +106,10 @@ elif st.session_state.page == "password":
 elif st.session_state.page == "phishing":
     set_bg("#ff416c", "#ff4b2b")   # Red alert style
     st.title("🕵️ Phishing Detector")
+    st.markdown("### 📌 Detect suspicious messages")
+    st.markdown("""
+👉 Paste a message/email below to check if it's a phishing attempt.
+""")
 
     text = st.text_area("Paste message/email")
 
@@ -122,6 +127,7 @@ elif st.session_state.page == "phishing":
             st.success("✅ Safe Message")
 
         st.write(f"Risk Score: {score}")
+        st.markdown("💡 Tip: Never click unknown links")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
@@ -130,7 +136,8 @@ elif st.session_state.page == "phishing":
 elif st.session_state.page == "url":
     set_bg("#11998e", "#38ef7d")   # Green safe vibe
     st.title("🌐 URL Safety Checker")
-
+    st.markdown("### 📌 Check if a website is safe")
+    
     url = st.text_input("Enter URL")
 
     if url:
@@ -138,6 +145,7 @@ elif st.session_state.page == "url":
             st.success("Safe Website ✅")
         else:
             st.error("⚠️ Suspicious URL")
+            st.markdown("### 📌 Check if a website is safe")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
@@ -147,7 +155,10 @@ elif st.session_state.page == "url":
 elif st.session_state.page == "ai":
     set_bg("#8e2de2", "#4a00e0")   # AI purple-blue
     st.title("🤖 AI Cyber Assistant")
-
+    st.markdown("### 📌 Ask anything about cyber security")
+    st.markdown("""
+👉 Get tips about passwords, phishing, and online safety.
+""")
     msg = st.text_input("Ask your question")
 
     if msg:
