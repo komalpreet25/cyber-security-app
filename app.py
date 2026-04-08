@@ -28,9 +28,11 @@ if "page" not in st.session_state:
 
 # 🏠 HOME PAGE
 if st.session_state.page == "home":
-    set_bg("#56721e", "#98942a")   # Blue gradient
+    set_bg("#ff7e5f", "#98942a")   # Blue gradient
     st.title("🚀 AI Powered Cyber Security Assistant")
     st.markdown("### 🔐 Stay Safe | 🧠 Smart AI | 🌐 Secure Web")
+    st.success("🔒 Your safety is our priority!")
+    st.markdown("👩‍💻 Developed by: Komalpreet Sahota")
 
     if st.button("Enter App"):
         st.session_state.page = "dashboard"
@@ -63,6 +65,7 @@ Built using Python and Streamlit.
 
     if col4.button("🤖 AI Assistant 🟣"):
         st.session_state.page = "ai"
+        
 
 # 🔐 PASSWORD PAGE
 elif st.session_state.page == "password":
