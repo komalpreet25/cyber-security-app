@@ -32,7 +32,7 @@ if st.session_state.page == "home":
     st.title("🚀 AI Powered Cyber Security Assistant")
     st.markdown("### 🔐 Stay Safe | 🧠 Smart AI | 🌐 Secure Web")
     st.success("🔒 Your safety is our priority!")
-    st.markdown("👩‍💻 Developed by: Komalpreet Sahota")
+    st.markdown("👩‍💻 Developed by: Komalpreet Kaur")
 
     if st.button("Enter App"):
         st.session_state.page = "dashboard"
