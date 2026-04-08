@@ -68,7 +68,10 @@ Built using Python and Streamlit.
 elif st.session_state.page == "password":
     set_bg("#42275a", "#734b6d")   # Purple
     st.title("🔐 Password Checker")
-
+    st.markdown("### 📌 Check how strong your password is")
+    st.markdown("""
+👉 Enter your password below to analyze its strength and security level.
+""")
     password = st.text_input("Enter password", type="password")
 
     def check_password(password):
