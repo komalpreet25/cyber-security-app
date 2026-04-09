@@ -102,7 +102,7 @@ elif st.session_state.page == "password":
         st.write(f"Security Score: {score}/4")
         st.markdown("💡 Tip: Use uppercase, numbers & symbols")
         st.markdown("---")
-st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
+        st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
@@ -152,7 +152,7 @@ elif st.session_state.page == "url":
             st.error("⚠️ Suspicious URL")
             st.markdown("### 📌 Check if a website is safe")
             st.markdown("---")
-st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
+            st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
