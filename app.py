@@ -109,7 +109,7 @@ elif st.session_state.page == "password":
 
 # 🕵️ PHISHING PAGE
 elif st.session_state.page == "phishing":
-    set_bg("#f9fab", "#f3f4f6")   # Red alert style
+    set_bg("#eaf6ff", "#f1f5f9")   # Red alert style
     st.title("🕵️ Phishing Detector")
     st.markdown("### 📌 Detect suspicious messages")
     st.markdown("""
