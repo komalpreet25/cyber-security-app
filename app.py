@@ -75,6 +75,8 @@ elif st.session_state.page == "password":
     st.markdown("""
 👉 Enter your password below to analyze its strength and security level.
 """)
+    st.markdown("---")
+    st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
     password = st.text_input("Enter password", type="password")
 
     def check_password(password):
@@ -101,8 +103,6 @@ elif st.session_state.page == "password":
 
         st.write(f"Security Score: {score}/4")
         st.markdown("💡 Tip: Use uppercase, numbers & symbols")
-        st.markdown("---")
-        st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
