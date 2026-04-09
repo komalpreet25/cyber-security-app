@@ -69,7 +69,7 @@ Built using Python and Streamlit.
 
 # 🔐 PASSWORD PAGE
 elif st.session_state.page == "password":
-    set_bg("#11998e", "#734b6d")   # Purple
+    set_bg("#dbeafe", "#bfdbfe")   # Purple
     st.title("🔐 Password Checker")
     st.markdown("### 📌 Check how strong your password is")
     st.markdown("""
