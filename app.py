@@ -142,6 +142,8 @@ elif st.session_state.page == "url":
     set_bg("#11998e", "#38ef7d")   # Green safe vibe
     st.title("🌐 URL Safety Checker")
     st.markdown("### 📌 Check if a website is safe")
+    st.markdown("---")
+    st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
     
     url = st.text_input("Enter URL")
 
@@ -151,8 +153,6 @@ elif st.session_state.page == "url":
         else:
             st.error("⚠️ Suspicious URL")
             st.markdown("### 📌 Check if a website is safe")
-            st.markdown("---")
-            st.warning("⚠️ Note: Do not enter real personal passwords or sensitive URLs. This tool is for educational purposes only.")
 
     if st.button("⬅ Back"):
         st.session_state.page = "dashboard"
