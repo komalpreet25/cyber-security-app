@@ -28,7 +28,7 @@ if "page" not in st.session_state:
 
 # 🏠 HOME PAGE
 if st.session_state.page == "home":
-    set_bg("#ff7e5f", "#98942a")   # Blue gradient
+    set_bg("#f9fafb", "#f3f4f6")   # Blue gradient
     st.title("🚀 AI Powered Cyber Security Assistant")
     st.markdown("### 🔐 Stay Safe | 🧠 Smart AI | 🌐 Secure Web")
     st.success("🔒 Your safety is our priority!")
@@ -109,7 +109,7 @@ elif st.session_state.page == "password":
 
 # 🕵️ PHISHING PAGE
 elif st.session_state.page == "phishing":
-    set_bg("#ff416c", "#ff4b2b")   # Red alert style
+    set_bg("#f9fab", "#f3f4f6")   # Red alert style
     st.title("🕵️ Phishing Detector")
     st.markdown("### 📌 Detect suspicious messages")
     st.markdown("""
