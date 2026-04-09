@@ -139,7 +139,7 @@ elif st.session_state.page == "phishing":
 
 # 🌐 URL CHECKER
 elif st.session_state.page == "url":
-    set_bg("#11998e", "#38ef7d")   # Green safe vibe
+    set_bg("#d4fc79", "#96e6a1")   # Green safe vibe
     st.title("🌐 URL Safety Checker")
     st.markdown("### 📌 Check if a website is safe")
     st.markdown("---")
@@ -160,7 +160,7 @@ elif st.session_state.page == "url":
 # 🤖 AI page
 
 elif st.session_state.page == "ai":
-    set_bg("#8e2de2", "#4a00e0")   # AI purple-blue
+    set_bg("#f8fafc", "#e2e8f0")   # AI purple-blue
     st.title("🤖 AI Cyber Assistant")
     st.markdown("### 📌 Ask anything about cyber security")
     st.markdown("""
