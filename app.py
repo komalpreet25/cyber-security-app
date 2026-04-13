@@ -160,7 +160,7 @@ elif st.session_state.page == "url":
 # 🤖 AI page
 
 elif st.session_state.page == "ai":
-    set_bg("#f8fafc", "#e2e8f0")   # AI purple-blue
+    set_bg("#f8dfff", "#fceeff")   # AI purple-blue
     st.title("🤖 AI Cyber Assistant")
     st.markdown("### 📌 Ask anything about cyber security")
     st.markdown("""
