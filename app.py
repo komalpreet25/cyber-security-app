@@ -131,9 +131,27 @@ if st.session_state.page == "home":
         st.session_state.page = "dashboard"
         st.rerun()
 
-
 # --- DASHBOARD PAGE ---
 elif st.session_state.page == "dashboard":
+    # 🚨 FIX PLACED HERE: This keeps your dashboard button labels bright white at all times
+    st.markdown("""
+        <style>
+        /* Force text on all dashboard buttons to be bright white */
+        .stButton > button {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important; /* Matches your card container background */
+            border: 1px solid #415a77 !important; /* Clean, professional border */
+        }
+        
+        /* Keep text white during hover, active click, or focus states */
+        .stButton > button:hover, .stButton > button:active, .stButton > button:focus {
+            color: #FFFFFF !important;
+            background-color: #2c3e50 !important; /* Slight background shift for click feedback */
+            border-color: #778da9 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("📊 Cyber Security Dashboard")
     st.write("Welcome to the main workspace. Click on any tool below to begin your security assessment.")
     st.markdown("---")
@@ -173,7 +191,6 @@ elif st.session_state.page == "dashboard":
             if st.button("Open AI Assistant", use_container_width=True):
                 st.session_state.page = "ai"
                 st.rerun()
-
 
 # --- PASSWORD CHECKER PAGE ---
 elif st.session_state.page == "password":
