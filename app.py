@@ -38,33 +38,87 @@ if st.session_state.page == "home":
         st.session_state.page = "dashboard"
 
 # 📊 DASHBOARD
-elif st.session_state.page == "dashboard":
-    set_bg("#bac35c", "#E1DB37")   # Dark blue-black
-    st.title("📊 Dashboard")
+st.markdown("""
+<style>
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 15px;
+}
+.metric {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0A66C2;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<h1 style='text-align:center;'>🛡️ Cyber Security Dashboard</h1>
+<p style='text-align:center;'>Monitor your digital safety in one place</p>
+""", unsafe_allow_html=True)
+
+# Stats Row
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
     st.markdown("""
-### 📌 About This Project
-This is an AI-powered Cyber Security Assistant that helps users:
-- Check password strength 🔐
-- Detect phishing messages 🕵️
-- Analyze URL safety 🌐
-- Get cyber security tips using AI 🤖
+    <div class='card'>
+        <div class='metric'>4</div>
+        Active Modules
+    </div>
+    """, unsafe_allow_html=True)
 
-Built using Python and Streamlit.
-""")
-    col1, col2 = st.columns(2)
-    col3, col4 = st.columns(2)
+with col2:
+    st.markdown("""
+    <div class='card'>
+        <div class='metric'>98%</div>
+        Security Score
+    </div>
+    """, unsafe_allow_html=True)
 
-    if col1.button("🔐 Password Checker 🔵"):
+with col3:
+    st.markdown("""
+    <div class='card'>
+        <div class='metric'>24/7</div>
+        AI Support
+    </div>
+    """, unsafe_allow_html=True)
+
+with col4:
+    st.markdown("""
+    <div class='card'>
+        <div class='metric'>100%</div>
+        Online
+    </div>
+    """, unsafe_allow_html=True)
+
+st.divider()
+
+st.subheader("🚀 Security Tools")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("🔐 Password Checker", use_container_width=True):
         st.session_state.page = "password"
 
-    if col2.button("🕵️ Phishing Detector 🔴"):
+    if st.button("🎣 Phishing Detector", use_container_width=True):
         st.session_state.page = "phishing"
 
-    if col3.button("🌐 URL Checker 🟢"):
+with col2:
+    if st.button("🌐 URL Checker", use_container_width=True):
         st.session_state.page = "url"
 
-    if col4.button("🤖 AI Assistant 🟣"):
-        st.session_state.page = "ai"
+    if st.button("🤖 AI Assistant", use_container_width=True):
+        st.session_state.page = "assistant"
+
+st.divider()
+
+st.info("💡 Tip: Strong passwords and safe URLs reduce cyber security risks.")
         
 
 # 🔐 PASSWORD PAGE
