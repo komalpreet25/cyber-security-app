@@ -193,7 +193,33 @@ elif st.session_state.page == "dashboard":
                 st.rerun()
 
 # --- PASSWORD CHECKER PAGE ---
+# --- PASSWORD CHECKER PAGE ---
 elif st.session_state.page == "password":
+    # 🚨 FIX PLACED HERE: This forces the input label and button text to be bright white at all times
+    st.markdown("""
+        <style>
+        /* Force input field labels to be bright white */
+        .stWidgetFormLabel, label, [data-testid="stWidgetLabel"] p {
+            color: #FFFFFF !important;
+            font-weight: 500 !important;
+        }
+        
+        /* Force the Back button text to be bright white */
+        .stButton > button {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        
+        /* Keep button text white during hover or focus states */
+        .stButton > button:hover, .stButton > button:active, .stButton > button:focus {
+            color: #FFFFFF !important;
+            background-color: #2c3e50 !important;
+            border-color: #778da9 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("🔐 Password Strength Checker")
     st.write("Test your password structure. For safety reasons, do not type your real everyday password.")
     st.markdown("---")
@@ -237,7 +263,6 @@ elif st.session_state.page == "password":
     if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
-
 
 # --- PHISHING DETECTOR PAGE ---
 elif st.session_state.page == "phishing":
