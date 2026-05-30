@@ -32,31 +32,31 @@ if st.session_state.page == "home":
     set_bg("#eef4ff", "#f8fbff")
 
    st.markdown("""
-<div style="
-background: linear-gradient(135deg,#0f172a,#1e293b);
-padding:40px;
-border-radius:25px;
-color:white;
-text-align:center;
-">
+   <div style="
+   background: linear-gradient(135deg,#0f172a,#1e293b);
+   padding:40px;
+   border-radius:25px;
+   color:white;
+   text-align:center;
+   ">
 
-<h1 style="font-size:55px;">
-🛡️ AI-Powered Cyber Security Assistant
-</h1>
+  <h1 style="font-size:55px;">
+  🛡️ AI-Powered Cyber Security Assistant
+  </h1>
 
-<h3 style="color:#cbd5e1;">
-Protect Yourself From Modern Cyber Threats
-</h3>
+  <h3 style="color:#cbd5e1;">
+   Protect Yourself From Modern Cyber Threats
+  </h3>
 
-<p style="font-size:20px;">
-🔐 Password Analysis &nbsp;&nbsp;|&nbsp;&nbsp;
-🎣 Phishing Detection &nbsp;&nbsp;|&nbsp;&nbsp;
-🌐 URL Scanner &nbsp;&nbsp;|&nbsp;&nbsp;
-🤖 AI Security Assistant
-</p>
+  <p style="font-size:20px;">
+  🔐 Password Analysis &nbsp;&nbsp;|&nbsp;&nbsp;
+  🎣 Phishing Detection &nbsp;&nbsp;|&nbsp;&nbsp;
+  🌐 URL Scanner &nbsp;&nbsp;|&nbsp;&nbsp;
+  🤖 AI Security Assistant
+  </p>
 
-</div>
-""", unsafe_allow_html=True)
+  </div>
+   """, unsafe_allow_html=True)
 
     st.write("")
 
