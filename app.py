@@ -27,78 +27,141 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 # 🏠 HOME PAGE
-# 🏠 HOME PAGE
 if st.session_state.page == "home":
 
-    set_bg("#0f172a", "#111827")
+    set_bg("#0b1120", "#111827")
 
     st.markdown("""
-    <div style="
-    background: linear-gradient(135deg,#0f172a,#1e293b);
-    padding:50px;
-    border-radius:25px;
-    color:white;
-    text-align:center;
-    border:1px solid #334155;
-    ">
+    <style>
+    .main-card{
+        background:#111827;
+        padding:40px;
+        border-radius:25px;
+        border:1px solid #334155;
+        text-align:center;
+    }
 
-    <h1 style="font-size:55px;margin-bottom:10px;">
-    🛡️ AI-Powered Cyber Security Assistant
-    </h1>
+    .stat-card{
+        background:#1e293b;
+        padding:20px;
+        border-radius:18px;
+        text-align:center;
+        border:1px solid #334155;
+    }
 
-    <h3 style="color:#94a3b8;">
-    Real-Time Protection Against Modern Cyber Threats
-    </h3>
+    .stat-number{
+        color:#38bdf8;
+        font-size:30px;
+        font-weight:bold;
+    }
 
-    <p style="font-size:18px;color:#cbd5e1;">
-    🔐 Password Analysis &nbsp;&nbsp;|&nbsp;&nbsp;
-    🎣 Phishing Detection &nbsp;&nbsp;|&nbsp;&nbsp;
-    🌐 URL Scanner &nbsp;&nbsp;|&nbsp;&nbsp;
-    🤖 AI Guidance
-    </p>
+    .stat-title{
+        color:white;
+        font-size:16px;
+    }
 
+    .info-box{
+        background:#1e293b;
+        padding:18px;
+        border-radius:15px;
+        color:white;
+        border-left:4px solid #38bdf8;
+    }
+
+    .footer-box{
+        background:#1e293b;
+        padding:15px;
+        border-radius:15px;
+        color:white;
+        text-align:center;
+    }
+
+    .stButton > button{
+        background:#06b6d4;
+        color:white;
+        border:none;
+        border-radius:12px;
+        height:55px;
+        font-size:18px;
+        font-weight:bold;
+        width:100%;
+    }
+
+    .stButton > button:hover{
+        background:#0891b2;
+        color:white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="main-card">
+        <h1 style="color:white;">
+        🛡️ AI-Powered Cyber Security Assistant
+        </h1>
+
+        <h3 style="color:#94a3b8;">
+        Real-Time Protection Against Modern Cyber Threats
+        </h3>
+
+        <p style="color:#cbd5e1;font-size:18px;">
+        🔐 Password Analysis |
+        🎣 Phishing Detection |
+        🌐 URL Scanner |
+        🤖 AI Guidance
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
     st.write("")
-    st.write("")
 
-    # Security Stats
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("🔐 Security Tools", "4")
+        st.markdown("""
+        <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-title">Security Tools</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("🤖 AI Support", "24/7")
+        st.markdown("""
+        <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-title">AI Support</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("🛡️ Protection Level", "HIGH")
+        st.markdown("""
+        <div class="stat-card">
+            <div class="stat-number">HIGH</div>
+            <div class="stat-title">Protection Level</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.write("")
 
-    st.info("💡 Monitor password strength, detect phishing attempts and verify suspicious URLs.")
+    st.markdown("""
+    <div class="info-box">
+    💡 Monitor password strength, detect phishing attempts, and verify suspicious URLs with AI-powered assistance.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.write("")
 
-    # Enter Dashboard Button
     col1, col2, col3 = st.columns([1,2,1])
 
     with col2:
-        if st.button("🚀 Enter Command Center", use_container_width=True):
+        if st.button("🚀 ENTER COMMAND CENTER"):
             st.session_state.page = "dashboard"
 
     st.write("")
     st.write("")
 
     st.markdown("""
-    <div style="
-    background:#1e293b;
-    padding:15px;
-    border-radius:15px;
-    text-align:center;
-    color:#94a3b8;
-    ">
+    <div class="footer-box">
     Developed by <b>Komalpreet Kaur</b> | BCA Cyber Security
     </div>
     """, unsafe_allow_html=True)
