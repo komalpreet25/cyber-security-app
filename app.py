@@ -281,7 +281,7 @@ elif st.session_state.page == "dashboard":
         """, unsafe_allow_html=True)
 
         if st.button("Open AI Assistant", use_container_width=True):
-            st.session_state.page = "Assistant"
+            st.session_state.page = "ai"
 
     st.divider()
 
