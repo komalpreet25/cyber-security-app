@@ -158,7 +158,6 @@ if st.session_state.page == "home":
             st.session_state.page = "dashboard"
 
     st.write("")
-    st.write("")
 
     st.markdown("""
     <div class="footer-box">
