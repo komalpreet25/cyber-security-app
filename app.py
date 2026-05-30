@@ -193,7 +193,6 @@ elif st.session_state.page == "dashboard":
                 st.rerun()
 
 # --- PASSWORD CHECKER PAGE ---
-# --- PASSWORD CHECKER PAGE ---
 elif st.session_state.page == "password":
     # 🚨 FIX PLACED HERE: This forces the input label and button text to be bright white at all times
     st.markdown("""
@@ -263,11 +262,44 @@ elif st.session_state.page == "password":
     if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
-
+        
 # --- PHISHING DETECTOR PAGE ---
 elif st.session_state.page == "phishing":
+    # 🚨 INTEGRATED VISIBILITY FIX
+    st.markdown("""
+        <style>
+        /* Force text area input label to be bright white */
+        .stWidgetFormLabel, label, [data-testid="stWidgetLabel"] p {
+            color: #FFFFFF !important;
+            font-weight: 500 !important;
+        }
+        /* Force pasted text inside the text area to be bright white */
+        .stTextArea textarea {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Force page action and back buttons to be permanently white */
+        .stButton > button {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Keep button text white during hover or focus states */
+        .stButton > button:hover, .stButton > button:active, .stButton > button:focus {
+            color: #FFFFFF !important;
+            background-color: #2c3e50 !important;
+            border-color: #778da9 !important;
+        }
+        /* Ensure headers match crisp white theme */
+        h1, h2, h3, h4 {
+            color: #FFFFFF !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("🎣 Phishing Message Detector")
-    st.write("Paste an email or text message body below to scan for common social engineering terms.")
+    st.write("Paste an email or text message below to scan for common social engineering terms.")
     st.markdown("---")
     
     message_input = st.text_area("Paste message content here:", height=150)
@@ -301,9 +333,41 @@ elif st.session_state.page == "phishing":
         st.session_state.page = "dashboard"
         st.rerun()
 
-
 # --- URL SAFETY CHECKER PAGE ---
 elif st.session_state.page == "url":
+    # 🚨 INTEGRATED VISIBILITY FIX
+    st.markdown("""
+        <style>
+        /* Force URL input text label to be bright white */
+        .stWidgetFormLabel, label, [data-testid="stWidgetLabel"] p {
+            color: #FFFFFF !important;
+            font-weight: 500 !important;
+        }
+        /* Force the typed web address link content to be readable white */
+        .stTextInput input {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Force the Back button text to be bright white */
+        .stButton > button {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Keep button text white during hover or focus states */
+        .stButton > button:hover, .stButton > button:active, .stButton > button:focus {
+            color: #FFFFFF !important;
+            background-color: #2c3e50 !important;
+            border-color: #778da9 !important;
+        }
+        /* Ensure headers match crisp white theme */
+        h1, h2, h3 {
+            color: #FFFFFF !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("🌐 URL Safety Checker")
     st.write("Analyze structural and protocol elements of a website link.")
     st.markdown("---")
@@ -329,7 +393,41 @@ elif st.session_state.page == "url":
 
 
 # --- AI ASSISTANT PAGE ---
+# --- AI ASSISTANT PAGE ---
 elif st.session_state.page == "ai":
+    # 🚨 INTEGRATED VISIBILITY FIX
+    st.markdown("""
+        <style>
+        /* Force user query input text label to be bright white */
+        .stWidgetFormLabel, label, [data-testid="stWidgetLabel"] p {
+            color: #FFFFFF !important;
+            font-weight: 500 !important;
+        }
+        /* Force interactive typed question inputs to display bright white text */
+        .stTextInput input {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Force quick FAQ buttons and system back buttons to stay white */
+        .stButton > button {
+            color: #FFFFFF !important;
+            background-color: #1b263b !important;
+            border: 1px solid #415a77 !important;
+        }
+        /* Keep button text white during hover or focus states */
+        .stButton > button:hover, .stButton > button:active, .stButton > button:focus {
+            color: #FFFFFF !important;
+            background-color: #2c3e50 !important;
+            border-color: #778da9 !important;
+        }
+        /* Ensure headers match crisp white theme */
+        h1, h2, h3 {
+            color: #FFFFFF !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("🤖 Cyber Security AI Assistant")
     st.write("Ask basic questions regarding online safety practices or cybersecurity definitions.")
     st.markdown("---")
