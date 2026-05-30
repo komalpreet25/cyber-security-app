@@ -28,14 +28,60 @@ if "page" not in st.session_state:
 
 # 🏠 HOME PAGE
 if st.session_state.page == "home":
-    set_bg("#f9fafb", "#f3f4f6")   # Blue gradient
-    st.title("🚀 AI Powered Cyber Security Assistant")
-    st.markdown("### 🔐 Stay Safe | 🧠 Smart AI | 🌐 Secure Web")
-    st.success("🔒 Your safety is our priority!")
-    st.markdown("👩‍💻 Developed by: Komalpreet Kaur")
 
-    if st.button("Enter App"):
-        st.session_state.page = "dashboard"
+    set_bg("#eef4ff", "#f8fbff")
+
+    st.markdown("""
+    <div style='text-align:center;padding:20px;'>
+
+    <h1 style='color:#1e3a8a;font-size:50px;'>
+    🛡️ AI-Powered Cyber Security Assistant
+    </h1>
+
+    <h3 style='color:#475569;'>
+    Protect Yourself From Modern Cyber Threats
+    </h3>
+
+    <p style='font-size:18px;color:#64748b;'>
+    Check Password Strength • Detect Phishing • Analyze URLs • Get AI Guidance
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.write("")
+
+    col1,col2,col3 = st.columns(3)
+
+    with col1:
+        st.metric("🔐 Security Tools", "4")
+
+    with col2:
+        st.metric("🤖 AI Support", "24/7")
+
+    with col3:
+        st.metric("🛡️ Protection", "High")
+
+    st.write("")
+    st.info("💡 Stay one step ahead of cyber criminals with AI-powered security tools.")
+
+    st.warning(
+        "⚠️ This application is developed for educational and awareness purposes."
+    )
+
+    st.write("")
+
+    col1,col2,col3 = st.columns([1,2,1])
+
+    with col2:
+        if st.button("🚀 Enter Dashboard", use_container_width=True):
+            st.session_state.page = "dashboard"
+
+    st.write("")
+    st.markdown(
+        "<p style='text-align:center;color:gray;'>Developed by Komalpreet Kaur | BCA Cyber Security</p>",
+        unsafe_allow_html=True
+    )
 
 # 📊 DASHBOARD
 elif st.session_state.page == "dashboard":
