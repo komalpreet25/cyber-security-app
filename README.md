@@ -37,9 +37,17 @@ A beginner-friendly Cyber Security application built using Python and Streamlit.
 
 ## 🛠️ Technologies Used
 
-* Python
-* Streamlit
-* Regular Expressions (Regex)
+   * Python – Main programming language
+   * Streamlit – Web application framework for building the dashboard
+   * HTML – Used for custom page layout and cards
+   * CSS – Used for dark theme, styling, buttons, sidebar, and UI customization
+   * Regular Expressions (Regex) – Used for password validation and phishing keyword detection
+   * Session State (Streamlit) – Used for page navigation and state management
+   * Cyber Security Concepts
+    1. Password Strength Analysis
+    2. Phishing Detection
+    3. URL Safety Verification
+    4. Cyber Security Awareness Assistant
 
 ## 🎯 Learning Objectives
 
