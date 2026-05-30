@@ -52,8 +52,9 @@ if "chat_history" not in st.session_state:
 
 # 2. SIDEBAR NAVIGATION
 with st.sidebar:
-    st.title("🛡️ Navigation Center")
-    st.write("Select a module below to test its functionality.")
+    # High-contrast bright white headings
+    st.markdown("<h1 style='color: #FFFFFF; font-weight: 700; margin-bottom: 0px;'>🛡️ Navigation Center</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #E5E7EB; margin-top: 5px;'>Select a module below to test its functionality.</p>", unsafe_allow_html=True)
     st.markdown("---")
     
     if st.button("🏠 Home Page", use_container_width=True):
@@ -65,7 +66,8 @@ with st.sidebar:
         st.rerun()
         
     st.markdown("---")
-    st.subheader("🛠️ Quick Tools")
+    st.markdown("<h3 style='color: #FFFFFF; font-weight: 700;'>🛠️ Quick Tools</h3>", unsafe_allow_html=True)
+    
     if st.button("Password Checker", use_container_width=True):
         st.session_state.page = "password"
         st.rerun()
