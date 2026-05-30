@@ -38,87 +38,128 @@ if st.session_state.page == "home":
         st.session_state.page = "dashboard"
 
 # 📊 DASHBOARD
-st.markdown("""
-<style>
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-bottom: 15px;
-}
-.metric {
-    font-size: 28px;
-    font-weight: bold;
-    color: #0A66C2;
-}
-</style>
-""", unsafe_allow_html=True)
+elif st.session_state.page == "dashboard":
 
-st.markdown("""
-<h1 style='text-align:center;'>🛡️ Cyber Security Dashboard</h1>
-<p style='text-align:center;'>Monitor your digital safety in one place</p>
-""", unsafe_allow_html=True)
+    set_bg("#f5f7ff", "#eef4ff")
 
-# Stats Row
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
     st.markdown("""
-    <div class='card'>
-        <div class='metric'>4</div>
-        Active Modules
-    </div>
+    <style>
+    .dashboard-title{
+        text-align:center;
+        color:#2d1b69;
+        font-size:42px;
+        font-weight:bold;
+    }
+
+    .dashboard-sub{
+        text-align:center;
+        color:#666;
+        font-size:18px;
+    }
+
+    .card{
+        background:white;
+        padding:20px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0px 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .tool-card{
+        background:white;
+        padding:25px;
+        border-radius:20px;
+        text-align:center;
+        border:1px solid #e5e7eb;
+        box-shadow:0px 4px 12px rgba(0,0,0,0.05);
+    }
+    </style>
     """, unsafe_allow_html=True)
 
-with col2:
-    st.markdown("""
-    <div class='card'>
-        <div class='metric'>98%</div>
-        Security Score
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        "<h1 class='dashboard-title'>🛡️ Cyber Security Dashboard</h1>",
+        unsafe_allow_html=True
+    )
 
-with col3:
-    st.markdown("""
-    <div class='card'>
-        <div class='metric'>24/7</div>
-        AI Support
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        "<p class='dashboard-sub'>Protect Yourself From Cyber Threats</p>",
+        unsafe_allow_html=True
+    )
 
-with col4:
-    st.markdown("""
-    <div class='card'>
-        <div class='metric'>100%</div>
-        Online
-    </div>
-    """, unsafe_allow_html=True)
+    st.write("")
 
-st.divider()
+    # TOP CARDS
+    c1,c2,c3,c4 = st.columns(4)
 
-st.subheader("🚀 Security Tools")
+    with c1:
+        st.metric("🔐 Modules", "4")
 
-col1, col2 = st.columns(2)
+    with c2:
+        st.metric("🛡️ Security Score", "98%")
 
-with col1:
-    if st.button("🔐 Password Checker", use_container_width=True):
-        st.session_state.page = "password"
+    with c3:
+        st.metric("⚠️ Threats Blocked", "24")
 
-    if st.button("🎣 Phishing Detector", use_container_width=True):
-        st.session_state.page = "phishing"
+    with c4:
+        st.metric("🤖 AI Support", "24/7")
 
-with col2:
-    if st.button("🌐 URL Checker", use_container_width=True):
-        st.session_state.page = "url"
+    st.divider()
 
-    if st.button("🤖 AI Assistant", use_container_width=True):
-        st.session_state.page = "assistant"
+    st.subheader("🚀 Quick Access")
 
-st.divider()
+    col1,col2 = st.columns(2)
 
-st.info("💡 Tip: Strong passwords and safe URLs reduce cyber security risks.")
+    with col1:
+
+        st.markdown("""
+        <div class="tool-card">
+        <h3>🔐 Password Checker</h3>
+        <p>Check password strength instantly.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open Password Checker", use_container_width=True):
+            st.session_state.page = "password"
+
+        st.markdown("""
+        <div class="tool-card">
+        <h3>🎣 Phishing Detector</h3>
+        <p>Detect suspicious phishing messages.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open Phishing Detector", use_container_width=True):
+            st.session_state.page = "phishing"
+
+    with col2:
+
+        st.markdown("""
+        <div class="tool-card">
+        <h3>🌐 URL Checker</h3>
+        <p>Check if a website is safe.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open URL Checker", use_container_width=True):
+            st.session_state.page = "url"
+
+        st.markdown("""
+        <div class="tool-card">
+        <h3>🤖 AI Assistant</h3>
+        <p>Get cyber security guidance.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open AI Assistant", use_container_width=True):
+            st.session_state.page = "Assistant"
+
+    st.divider()
+
+    st.info("💡 Cyber Tip: Use strong passwords and avoid suspicious links.")
+
+    st.warning(
+        "⚠️ Do not enter real passwords or banking information."
+    )
         
 
 # 🔐 PASSWORD PAGE
