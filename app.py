@@ -27,6 +27,7 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 # 🏠 HOME PAGE
+# 🏠 HOME PAGE
 if st.session_state.page == "home":
 
     set_bg("#0f172a", "#111827")
@@ -34,26 +35,36 @@ if st.session_state.page == "home":
     st.markdown("""
     <div style="
     background: linear-gradient(135deg,#0f172a,#1e293b);
-    padding:40px;
+    padding:50px;
     border-radius:25px;
     color:white;
     text-align:center;
+    border:1px solid #334155;
     ">
 
-    <h1 style="font-size:55px;">
+    <h1 style="font-size:55px;margin-bottom:10px;">
     🛡️ AI-Powered Cyber Security Assistant
     </h1>
 
-    <h3 style="color:#cbd5e1;">
-    Protect Yourself From Modern Cyber Threats
+    <h3 style="color:#94a3b8;">
+    Real-Time Protection Against Modern Cyber Threats
     </h3>
+
+    <p style="font-size:18px;color:#cbd5e1;">
+    🔐 Password Analysis &nbsp;&nbsp;|&nbsp;&nbsp;
+    🎣 Phishing Detection &nbsp;&nbsp;|&nbsp;&nbsp;
+    🌐 URL Scanner &nbsp;&nbsp;|&nbsp;&nbsp;
+    🤖 AI Guidance
+    </p>
 
     </div>
     """, unsafe_allow_html=True)
 
     st.write("")
+    st.write("")
 
-    col1,col2,col3 = st.columns(3)
+    # Security Stats
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.metric("🔐 Security Tools", "4")
@@ -62,29 +73,37 @@ if st.session_state.page == "home":
         st.metric("🤖 AI Support", "24/7")
 
     with col3:
-        st.metric("🛡️ Protection", "High")
-
-    st.write("")
-    st.info("💡 Stay one step ahead of cyber criminals with AI-powered security tools.")
-
-    st.warning(
-        "⚠️ This application is developed for educational and awareness purposes."
-    )
+        st.metric("🛡️ Protection Level", "HIGH")
 
     st.write("")
 
-    col1,col2,col3 = st.columns([1,2,1])
+    st.info("💡 Monitor password strength, detect phishing attempts and verify suspicious URLs.")
+
+    st.write("")
+
+    # Enter Dashboard Button
+    col1, col2, col3 = st.columns([1,2,1])
 
     with col2:
-        if st.button("🚀 Enter Dashboard", use_container_width=True):
+        if st.button("🚀 Enter Command Center", use_container_width=True):
             st.session_state.page = "dashboard"
 
     st.write("")
-    st.markdown(
-        "<p style='text-align:center;color:gray;'>Developed by Komalpreet Kaur | BCA Cyber Security</p>",
-        unsafe_allow_html=True
-    )
+    st.write("")
 
+    st.markdown("""
+    <div style="
+    background:#1e293b;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    color:#94a3b8;
+    ">
+    Developed by <b>Komalpreet Kaur</b> | BCA Cyber Security
+    </div>
+    """, unsafe_allow_html=True)
+
+  
 # 📊 DASHBOARD
 elif st.session_state.page == "dashboard":
 
