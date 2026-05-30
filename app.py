@@ -27,143 +27,65 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 # 🏠 HOME PAGE
+# 🏠 HOME PAGE
 if st.session_state.page == "home":
 
     set_bg("#0b1120", "#111827")
 
-    st.markdown("""
-    <style>
-    .main-card{
-        background:#111827;
-        padding:40px;
-        border-radius:25px;
-        border:1px solid #334155;
-        text-align:center;
-    }
+    st.title("🛡️ AI-Powered Cyber Security Assistant")
+    st.subheader("Real-Time Protection Against Modern Cyber Threats")
 
-    .stat-card{
-        background:#1e293b;
-        padding:20px;
-        border-radius:18px;
-        text-align:center;
-        border:1px solid #334155;
-    }
-
-    .stat-number{
-        color:#38bdf8;
-        font-size:30px;
-        font-weight:bold;
-    }
-
-    .stat-title{
-        color:white;
-        font-size:16px;
-    }
-
-    .info-box{
-        background:#1e293b;
-        padding:18px;
-        border-radius:15px;
-        color:white;
-        border-left:4px solid #38bdf8;
-    }
-
-    .footer-box{
-        background:#1e293b;
-        padding:15px;
-        border-radius:15px;
-        color:white;
-        text-align:center;
-    }
-
-    .stButton > button{
-        background:#06b6d4;
-        color:white;
-        border:none;
-        border-radius:12px;
-        height:55px;
-        font-size:18px;
-        font-weight:bold;
-        width:100%;
-    }
-
-    .stButton > button:hover{
-        background:#0891b2;
-        color:white;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    st.markdown("---")
 
     st.markdown("""
-    <div class="main-card">
-        <h1 style="color:white;">
-        🛡️ AI-Powered Cyber Security Assistant
-        </h1>
+### 🚀 Features
 
-        <h3 style="color:#94a3b8;">
-        Real-Time Protection Against Modern Cyber Threats
-        </h3>
+✅ Password Strength Analysis
 
-        <p style="color:#cbd5e1;font-size:18px;">
-        🔐 Password Analysis |
-        🎣 Phishing Detection |
-        🌐 URL Scanner |
-        🤖 AI Guidance
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+✅ Phishing Message Detection
 
-    st.write("")
+✅ Website URL Safety Checker
+
+✅ AI-Based Cyber Security Guidance
+""")
+
+    st.markdown("---")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("""
-        <div class="stat-card">
-            <div class="stat-number">4</div>
-            <div class="stat-title">Security Tools</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.metric("Security Tools", "4")
 
     with col2:
-        st.markdown("""
-        <div class="stat-card">
-            <div class="stat-number">24/7</div>
-            <div class="stat-title">AI Support</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.metric("AI Support", "24/7")
 
     with col3:
-        st.markdown("""
-        <div class="stat-card">
-            <div class="stat-number">HIGH</div>
-            <div class="stat-title">Protection Level</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.metric("Protection", "HIGH")
+
+    st.markdown("---")
+
+    st.info(
+        "Monitor password strength, detect phishing attempts, and verify suspicious URLs using AI-powered assistance."
+    )
+
+    st.warning(
+        "This application is developed for educational and cyber awareness purposes."
+    )
+
+    st.markdown("### 🎯 Why Use This Tool?")
+    st.write(
+        "This platform helps users improve their cyber security awareness by analyzing passwords, detecting phishing attempts, checking website safety, and providing AI-based recommendations."
+    )
 
     st.write("")
 
-    st.markdown("""
-    <div class="info-box">
-    💡 Monitor password strength, detect phishing attempts, and verify suspicious URLs with AI-powered assistance.
-    </div>
-    """, unsafe_allow_html=True)
+    if st.button("🚀 Enter Command Center", use_container_width=True):
+        st.session_state.page = "dashboard"
 
     st.write("")
-
-    col1, col2, col3 = st.columns([1,2,1])
-
-    with col2:
-        if st.button("🚀 ENTER COMMAND CENTER"):
-            st.session_state.page = "dashboard"
-
     st.write("")
 
-    st.markdown("""
-    <div class="footer-box">
-    Developed by <b>Komalpreet Kaur</b> | BCA Cyber Security
-    </div>
-    """, unsafe_allow_html=True)
+    st.caption("Developed by Komalpreet Kaur | BCA Cyber Security")
 
   
 # 📊 DASHBOARD
