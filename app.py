@@ -1,357 +1,347 @@
 import streamlit as st
 import re
 
-# ==========================================
-# 1. GLOBAL INITIALIZATION & CONFIGURATION
-# ==========================================
+# 1. PAGE CONFIGURATION & THEME
 st.set_page_config(
-    page_title="SOC Command Center | AI Cyber Security Assistant",
+    page_title="Cyber Security Assistant",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Global Session State Navigation Control
+# Apply consistent dark navy styling across all components
+st.markdown("""
+    <style>
+    /* Dark Navy Background and White Text */
+    .stApp {
+        background-color: #0d1b2a !important;
+        color: #e0e1dd !important;
+    }
+    /* Sidebar Background styling */
+    [data-testid="stSidebar"] {
+        background-color: #1b263b !important;
+    }
+    /* Custom simple styling for Feature Cards */
+    .feature-card {
+        background-color: #1b263b;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #415a77;
+        margin-bottom: 15px;
+    }
+    .feature-card h3 {
+        color: #e0e1dd !important;
+        margin-top: 0;
+    }
+    .feature-card p {
+        color: #e0e1dd !important;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Initialize Session State for Page Navigation
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# Unified SOC Dark Theme CSS injection
-def inject_soc_theme():
-    st.markdown("""
-        <style>
-        /* Base App Styling */
-        .stApp {
-            background-color: #0a0f1d !important;
-            color: #e2e8f0 !important;
-        }
-        
-        /* Custom Sidebar Overrides */
-        [data-testid="stSidebar"] {
-            background-color: #0f172a !important;
-            border-right: 1px solid #1e293b;
-        }
-        
-        /* Card & Container Mockups */
-        .soc-card {
-            background-color: #111827;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #1e293b;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .soc-card h3 {
-            color: #38bdf8 !important;
-            margin-top: 0px;
-        }
-        
-        /* Metric block styling overrides */
-        [data-testid="stMetricValue"] {
-            font-size: 32px !important;
-            font-weight: 700 !important;
-            color: #0ea5e9 !important;
-        }
-        
-        /* Smooth button treatments */
-        .stButton>button {
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-            transition: all 0.3s ease;
-        }
-        
-        /* Custom Footer Elements */
-        .soc-footer {
-            text-align: center;
-            padding: 20px;
-            color: #64748b;
-            font-size: 13px;
-            border-top: 1px solid #1e293b;
-            margin-top: 50px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-inject_soc_theme()
+# Initialize Session State for AI Chat History
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
 
-# ==========================================
-# 2. PERMANENT SIDEBAR AI PANEL
-# ==========================================
+# 2. SIDEBAR NAVIGATION
 with st.sidebar:
-    st.title("🛡️ SOC Control")
-    st.markdown("`SYSTEM STATUS: OPERATIONAL`")
-    st.divider()
+    st.title("🛡️ Navigation Center")
+    st.write("Select a module below to test its functionality.")
+    st.markdown("---")
     
-    # Fast Page Jumper for convenient grading/reviewing
-    st.subheader("🌐 Core Navigation")
-    if st.button("🏠 Command Home", use_container_width=True):
+    if st.button("🏠 Home Page", use_container_width=True):
         st.session_state.page = "home"
-    if st.button("📊 Security Dashboard", use_container_width=True):
-        st.session_state.page = "dashboard"
+        st.rerun()
         
-    st.divider()
-    st.subheader("🤖 Quick AI Look-Up")
-    sidebar_input = st.text_input("Query triage parameters:", placeholder="e.g., firewall, ransomware")
-    
-    if sidebar_input:
-        query = sidebar_input.lower()
-        if "password" in query:
-            st.info("🔐 Security Protocol: Enforce >= 12 characters combining symbols, length entropy, and non-dictionary phrases.")
-        elif "phishing" in query or "url" in query:
-            st.warning("⚠️ Threat vector recognized. Check domain string anomalies and header variations.")
-        else:
-            st.write("🤖 *System advice: Ensure defensive posture via principle of least privilege (PoLP).*")
+    if st.button("📊 Main Dashboard", use_container_width=True):
+        st.session_state.page = "dashboard"
+        st.rerun()
+        
+    st.markdown("---")
+    st.subheader("🛠️ Quick Tools")
+    if st.button("Password Checker", use_container_width=True):
+        st.session_state.page = "password"
+        st.rerun()
+    if st.button("Phishing Detector", use_container_width=True):
+        st.session_state.page = "phishing"
+        st.rerun()
+    if st.button("URL Safety Checker", use_container_width=True):
+        st.session_state.page = "url"
+        st.rerun()
+    if st.button("AI Assistant", use_container_width=True):
+        st.session_state.page = "ai"
+        st.rerun()
 
 
-# ==========================================
-# 3. PAGE VIEW LOGIC
-# ==========================================
+# 3. PAGE LOGIC
 
-# 🏠 HOME PAGE VIEW
+# --- HOME PAGE ---
 if st.session_state.page == "home":
-    # Hero Title Setup
-    st.markdown("<h1 style='color: #f8fafc; font-size: 46px; font-weight: 800; margin-bottom: 5px;'>AI-Powered Cyber Security Command Suite</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #38bdf8; font-size: 19px; font-weight: 400;'>Next-Gen Threat Tactical Triage & Educational Assessment Interface</p>", unsafe_allow_html=True)
+    st.title("🛡️ AI-Powered Cyber Security Assistant")
+    st.write("An educational tool designed to analyze common security risks, evaluate password strengths, detect suspicious links, and provide cyber safety guidance.")
     st.markdown("---")
     
-    # Executive Abstract Grid
-    col_left, col_right = st.columns([2, 1])
-    with col_left:
-        st.markdown("### 📊 Project Overview")
-        st.write(
-            "Designed for critical assessment environments, this intelligent interface serves as an operational "
-            "framework for handling baseline data vulnerabilities. Integrating pattern identification, heuristic "
-            "text scanning, and natural processing guidelines, the platform educates tech administrators on defending system assets."
-        )
-        st.info("🚀 System Readiness Notice: This portal is formatted explicitly for technical portfolio presentation and structural validation.")
+    st.subheader("💡 Core Features Available")
     
-    with col_right:
-        st.markdown("### ⚡ Threat Metrics")
-        m1, m2 = st.columns(2)
-        m1.metric("Engine Vectors", "4 Modules")
-        m2.metric("SLA Response", "< 120ms")
+    # 4 Feature Cards Layout
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+            <div class="feature-card">
+                <h3>🔐 Password Checker</h3>
+                <p>Tests your password strength based on length, numbers, capital letters, and special characters.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        st.write("") # Spacing
+        st.markdown("""
+            <div class="feature-card">
+                <h3>🌐 URL Safety Checker</h3>
+                <p>Inspects website links to check if they use secure HTTPS protocols and standard domain structures.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    with col2:
+        st.markdown("""
+            <div class="feature-card">
+                <h3>🎣 Phishing Detector</h3>
+                <p>Scans text messages or emails to spot suspicious words commonly used in phishing scams.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        st.write("") # Spacing
+        st.markdown("""
+            <div class="feature-card">
+                <h3>🤖 AI Assistant</h3>
+                <p>An interactive guide to answer your basic cyber security questions and offer online safety tips.</p>
+            </div>
+        """, unsafe_allow_html=True)
         
     st.markdown("---")
-    st.markdown("### ⚙️ Core Inspection Modules")
     
-    # Feature Showcase Grid
-    f1, f2, f3, f4 = st.columns(4)
-    with f1:
-        st.markdown("""<div class='soc-card'><h3>🔐 Password Strength</h3><p>Evaluates lexical security properties using complex regex pattern recognition logic.</p></div>""", unsafe_allow_html=True)
-    with f2:
-        st.markdown("""<div class='soc-card'><h3>🎣 Phishing Engine</h3><p>Parses message payloads for social engineering semantic hooks and pressure vocabulary.</p></div>""", unsafe_allow_html=True)
-    with f3:
-        st.markdown("""<div class='soc-card'><h3>🌐 URL Triage</h3><p>Verifies operational transport layers and filters protocol configurations instantly.</p></div>""", unsafe_allow_html=True)
-    with f4:
-        st.markdown("""<div class='soc-card'><h3>🤖 SecOps Assistant</h3><p>On-demand interactive operational playbooks regarding cloud and endpoint security postures.</p></div>""", unsafe_allow_html=True)
-        
-    st.write("")
-    if st.button("🚀 Enter Command Dashboard", use_container_width=True, type="primary"):
+    # Primary Action Button
+    if st.button("🚀 Enter Dashboard", use_container_width=True, type="primary"):
         st.session_state.page = "dashboard"
         st.rerun()
 
 
-# 📊 DASHBOARD VIEW
+# --- DASHBOARD PAGE ---
 elif st.session_state.page == "dashboard":
-    st.markdown("<h1 style='color: #f8fafc; font-size: 38px;'>🛡️ Operational Security Dashboard</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #94a3b8;'>Real-Time Analytic Command Panel & Sandbox Utilities</p>", unsafe_allow_html=True)
+    st.title("📊 Cyber Security Dashboard")
+    st.write("Welcome to the main workspace. Click on any tool below to begin your security assessment.")
     st.markdown("---")
     
-    # Command Center KPI Cards
-    kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-    with kpi1:
-        st.metric("Security Evaluation Score", "98%", delta="Optimal Dynamic Range")
-    with kpi2:
-        st.metric("Active Detection Daemons", "4/4 Active")
-    with kpi3:
-        st.metric("Intercepted Sample Index", "24 Deflected")
-    with kpi4:
-        st.metric("Cognitive Core Availability", "24/7 Standby")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        with st.container(border=True):
+            st.subheader("🔐 Password Strength Checker")
+            st.write("Analyze character rules and receive instant improvement tips.")
+            if st.button("Open Password Tool", use_container_width=True):
+                st.session_state.page = "password"
+                st.rerun()
+                
+        st.write("") # Spacing
         
-    st.markdown("---")
-    st.subheader("🎯 Threat Engine Entrypoints")
-    
-    # UI Navigation Matrix Layout
-    grid_col1, grid_col2 = st.columns(2)
-    
-    with grid_col1:
-        st.markdown("""
-            <div class="soc-card">
-                <h3>🔐 Dynamic Password Complexity Analyzer</h3>
-                <p>Run immediate compliance inspections checking for length constraints, character diversity, and structural predictability matrices.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        if st.button("Initialize Password Analysis Pipeline", use_container_width=True):
-            st.session_state.page = "password"
-            st.rerun()
-            
-        st.markdown("""
-            <div class="soc-card">
-                <h3>🎣 Social Engineering Phishing Parser</h3>
-                <p>Scans incoming text data streams against dynamic contextual lexicons to flag potential phishing attacks.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        if st.button("Initialize Phishing Ingestion Stream", use_container_width=True):
-            st.session_state.page = "phishing"
-            st.rerun()
-
-    with grid_col2:
-        st.markdown("""
-            <div class="soc-card">
-                <h3>🌐 Transport Layer URL Verification</h3>
-                <p>Checks structural validity of hostnames and checks if transmission protocols meet minimum transport safety specifications.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        if st.button("Launch URL Integrity Audit", use_container_width=True):
-            st.session_state.page = "url"
-            st.rerun()
-            
-        st.markdown("""
-            <div class="soc-card">
-                <h3>🤖 SecOps Cognitive Copilot</h3>
-                <p>Access structured responses detailing architectural threat mitigation tactics and standard security rules.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        if st.button("Connect To AI Copilot Hub", use_container_width=True):
-            st.session_state.page = "ai"
-            st.rerun()
+        with st.container(border=True):
+            st.subheader("🎣 Phishing Message Parser")
+            st.write("Scan emails or suspicious text alerts for spam trigger words.")
+            if st.button("Open Phishing Tool", use_container_width=True):
+                st.session_state.page = "phishing"
+                st.rerun()
+                
+    with col2:
+        with st.container(border=True):
+            st.subheader("🌐 URL Integrity Checker")
+            st.write("Check if a link uses proper encryption protocols before visiting.")
+            if st.button("Open URL Tool", use_container_width=True):
+                st.session_state.page = "url"
+                st.rerun()
+                
+        st.write("") # Spacing
+        
+        with st.container(border=True):
+            st.subheader("🤖 Cyber Security AI Assistant")
+            st.write("Ask questions regarding security guidelines and best practices.")
+            if st.button("Open AI Assistant", use_container_width=True):
+                st.session_state.page = "ai"
+                st.rerun()
 
 
-# 🔐 PASSWORD CHECKER ENGINE
+# --- PASSWORD CHECKER PAGE ---
 elif st.session_state.page == "password":
-    st.title("🔐 Password Complexity Analyzer")
-    st.write("Evaluate lexical structural integrity constraints against targeted entropy configurations.")
+    st.title("🔐 Password Strength Checker")
+    st.write("Test your password structure. For safety reasons, do not type your real everyday password.")
     st.markdown("---")
     
-    st.warning("🔒 Operational Guardrail: Live user production credentials should not be submitted. Utilize dummy verification variants exclusively.")
+    user_password = st.text_input("Enter a test password:", type="password")
     
-    password = st.text_input("Target String Input", type="password", placeholder="Provide prospective text string...")
-    
-    def evaluate_entropy(val):
-        score = 0
-        if len(val) >= 8: score += 1
-        if re.search("[A-Z]", val): score += 1
-        if re.search("[0-9]", val): score += 1
-        if re.search("[@#$%^&*()_+={}\[\]|\\:;\"'<>,.?/~`-]", val): score += 1
-        return score
-
-    if password:
-        strength_metric = evaluate_entropy(password)
-        st.markdown(f"#### Analysis Metrics: `{strength_metric}/4` Points")
+    if user_password:
+        # Strength Criteria Check
+        has_length = len(user_password) >= 8
+        has_upper = re.search("[A-Z]", user_password) is not None
+        has_number = re.search("[0-9]", user_password) is not None
+        has_special = re.search("[@#$%^&*!_?]", user_password) is not None
         
-        if strength_metric <= 1:
-            st.error("🚨 CRITICAL VULNERABILITY: Low Entropy. String easily susceptible to dictionary attacks or direct brute forcing.")
-        elif strength_metric <= 3:
-            st.warning("⚠️ COMPLIANCE WARNING: Moderate Complexity. Strengthen key length and inject random special characters.")
+        # Calculate Score
+        score = sum([has_length, has_upper, has_number, has_special])
+        
+        st.subheader("Analysis Results:")
+        if score <= 1:
+            st.error("❌ Weak Password")
+        elif score <= 3:
+            st.warning("⚠️ Medium Password")
         else:
-            st.success("🛡️ SECURE: High Entropy Profile. Meets modern standards for safe verification storage models.")
+            st.success("✅ Strong Password")
             
-    st.write("")
-    if st.button("⬅ Return To System Console", type="secondary"):
+        # Display Checklist Feedback
+        st.write(f"**Score:** {score} out of 4 criteria met")
+        st.checkbox("At least 8 characters long", value=has_length, disabled=True)
+        st.checkbox("Contains an uppercase letter (A-Z)", value=has_upper, disabled=True)
+        st.checkbox("Contains a number (0-9)", value=has_number, disabled=True)
+        st.checkbox("Contains a special character (@, #, $, %, etc.)", value=has_special, disabled=True)
+        
+        # Simple Suggestions
+        st.markdown("#### 💡 Tips to improve:")
+        if not has_length: st.write("- Make your password longer (at least 8 to 12 characters).")
+        if not has_upper: st.write("- Add at least one capital letter.")
+        if not has_number: st.write("- Include one or more numbers.")
+        if not has_special: st.write("- Use special symbols like ! or @ to make it harder to guess.")
+        if score == 4: st.write("- Perfect! Your password structure looks great.")
+        
+    st.markdown("---")
+    if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
 
 
-# 🕵️ PHISHING DETECTOR ENGINE
+# --- PHISHING DETECTOR PAGE ---
 elif st.session_state.page == "phishing":
-    st.title("🕵️ Phishing Signature Parser")
-    st.write("Analyzes unstructured messaging logs for indicators of malicious intent or social engineering patterns.")
+    st.title("🎣 Phishing Message Detector")
+    st.write("Paste an email or text message body below to scan for common social engineering terms.")
     st.markdown("---")
     
-    payload = st.text_area("Ingest E-mail/SMS Message Payload", placeholder="Paste body headers and textual contents for signature inspection...", height=150)
+    message_input = st.text_area("Paste message content here:", height=150)
     
-    indicators = ["urgent", "click", "verify", "password", "bank", "otp", "login", "account", "suspended", "action required"]
+    # List of common phishing terms
+    phishing_keywords = ["urgent", "verify", "suspended", "bank", "otp", "login", "password", "winner", "click here", "lottery"]
     
-    if payload:
-        detected_triggers = [word for word in indicators if word in payload.lower()]
-        risk_score = len(detected_triggers)
+    if message_input:
+        found_words = [word for word in phishing_keywords if word in message_input.lower()]
+        word_count = len(found_words)
         
-        st.markdown(f"#### Risk Metrics Found: `{risk_score}` Threats Flagged")
-        
-        if risk_score >= 2:
-            st.error(f"🚨 ALERT: High Probability Threat Signature Detected! Flagged Keywords: {detected_triggers}")
-            st.markdown("""
-            **Triage Actions Prescribed:**
-            * Do not interact with links embedded within the payload source.
-            * Isolate source domain headers and trace original MX authority properties.
-            """)
+        st.subheader("Risk Assessment:")
+        if word_count >= 2:
+            st.error("🚨 High Risk: This message contains multiple suspicious terms often used in scams.")
+        elif word_count == 1:
+            st.warning("⚠️ Caution: One suspicious term detected. Double-check the sender's identity.")
         else:
-            st.success("✅ NOMINAL: No high-risk language patterns identified within input data parameters.")
+            st.success("✅ Low Risk: No obvious phishing trigger words found in the text.")
             
-    st.write("")
-    if st.button("⬅ Return To System Console"):
+        if found_words:
+            st.markdown(f"**Highlighted Suspicious Words:** {', '.join(found_words)}")
+            
+        st.markdown("""
+        **💡 Standard Safety Rules:**
+        * Never click links inside unexpected text messages or emails.
+        * Official organizations will not ask for your password or OTP over a text message.
+        """)
+        
+    st.markdown("---")
+    if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
 
 
-# 🌐 URL SAFETY CHECKER
+# --- URL SAFETY CHECKER PAGE ---
 elif st.session_state.page == "url":
-    st.title("🌐 Protocol-Level URL Safety Verification")
-    st.write("Validates endpoint addressing schemes against transport criteria and syntax properties.")
+    st.title("🌐 URL Safety Checker")
+    st.write("Analyze structural and protocol elements of a website link.")
     st.markdown("---")
     
-    target_url = st.text_input("Enter Target Domain / URL Asset", placeholder="example.com or https://secure-portal.org")
+    url_input = st.text_input("Enter URL to check (e.g., https://example.com):")
     
-    if target_url:
-        # Simple structural parsing
-        if target_url.lower().startswith("https://"):
-            st.success("🔒 SAFE PROTOCOL ENFORCED: Destination explicitly maps to an encrypted TLS/SSL layer connection.")
-            st.info("💡 Portfolio Tip: A secure transport protocol does not verify structural backend legitimacy, but guarantees encrypted routing.")
+    if url_input:
+        st.subheader("Result:")
+        
+        # Check for secure protocol prefix
+        if url_input.lower().startswith("https://"):
+            st.success("🔒 Secure Protocol (HTTPS): The communication channel to this website is encrypted.")
+            st.info("Note: Even if a site uses HTTPS, always make sure the domain name is spelled correctly (e.g., look out for fake sites like 'g00gle.com').")
+        elif url_input.lower().startswith("http://"):
+            st.error("⚠️ Unencrypted Protocol (HTTP): This website does not use modern encryption. Avoid entering sensitive data like login details or card numbers.")
         else:
-            st.error("🚨 UNENCRYPTED TRANSPORT DETECTED: Address uses plain HTTP text or missing protocol validation. Subject to potential MiTM eavesdropping.")
+            st.warning("❓ Incomplete Link: Please include the full prefix protocol (http:// or https://) to check its safety accurately.")
             
-    st.write("")
-    if st.button("⬅ Return To System Console"):
+    st.markdown("---")
+    if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
 
 
-# 🤖 AI CYBER ASSISTANT KNOWLEDGE BASE
+# --- AI ASSISTANT PAGE ---
 elif st.session_state.page == "ai":
-    st.title("🤖 SecOps AI Cognitive Guard")
-    st.write("Interactive defensive knowledge repository providing immediate resolution guidance pipelines.")
+    st.title("🤖 Cyber Security AI Assistant")
+    st.write("Ask basic questions regarding online safety practices or cybersecurity definitions.")
     st.markdown("---")
     
-    prompt = st.text_input("Consult Tactical Database System", placeholder="Type a concept you wish to learn about (e.g. Passwords, Phishing, Cloud Security)...")
+    # Quick Option Buttons to simulate a chat guide instantly
+    st.write("**Frequently Asked Questions:**")
+    col_q1, col_q2, col_q3 = st.columns(3)
     
-    if prompt:
-        p_low = prompt.lower()
-        if "password" in p_low:
-            st.markdown("""
-            ### 🔐 Passphrase Hardening Framework
-            * **Length Parameterization:** Enforce a minimum boundary of 12-16 algorithmic components.
-            * **Passphrase Strategy:** Swap standard dictionary mutations for unique, multi-word configurations (e.g., `Copper#Skyline#9761!Matrix`).
-            * **MFA Implementations:** Pair storage management software configurations directly alongside hardware key systems or TOTP token steps.
-            """)
-        elif "phishing" in p_low:
-            st.markdown("""
-            ### 🎣 Phishing Defense Protocols
-            * **Ingestion Isolation:** Verify top-level domains carefully against internal directories.
-            * **Grammatical Anomalies:** Look for unnatural syntax, forced urgency statements, and misaligned graphic design components.
-            * **Verification Routines:** Reach out directly using official out-of-band support directories instead of relying on links provided in the message.
-            """)
-        else:
-            st.markdown("""
-            ### 💻 Core Defensive Infrastructure Guidelines
-            * **Network Segmentation:** Split open interfaces away from internal data processing environments.
-            * **Zero Trust Architectures:** Enforce strict access authorization checks at every point in the network, regardless of location.
-            * **Patch Automation Cycles:** Schedule timely operating system image updates to protect against zero-day vulnerabilities.
-            """)
+    chosen_prompt = ""
+    with col_q1:
+        if st.button("How do I stay safe online?", use_container_width=True):
+            chosen_prompt = "How do I stay safe online?"
+    with col_q2:
+        if st.button("What is Two-Factor Authentication?", use_container_width=True):
+            chosen_prompt = "What is Two-Factor Authentication?"
+    with col_q3:
+        if st.button("How can I spot a phishing email?", use_container_width=True):
+            chosen_prompt = "How can I spot a phishing email?"
             
-    st.write("")
-    if st.button("⬅ Return To System Console"):
+    # Regular Custom Input Box
+    user_query = st.text_input("Or type your own question here:", value=chosen_prompt)
+    
+    if user_query:
+        st.markdown(f"**Question:** {user_query}")
+        st.markdown("**Answer:**")
+        
+        query_lower = user_query.lower()
+        if "safe" in query_lower or "online" in query_lower:
+            st.write("1. Use separate, unique passwords for every online account.\n"
+                     "2. Turn on Two-Factor Authentication (2FA) wherever available.\n"
+                     "3. Keep your mobile phone apps and computer operating systems updated.\n"
+                     "4. Avoid logging into personal banking profiles on free public Wi-Fi networks.")
+        elif "authentication" in query_lower or "2fa" in query_lower:
+            st.write("Two-Factor Authentication (2FA) adds an extra step of safety. "
+                     "Instead of just your password, it requires a second piece of evidence—such as a temporary text message code sent to your phone or an authenticator app token. This stops attackers from entering even if they steal your password.")
+        elif "phishing" in query_lower or "email" in query_lower:
+            st.write("1. Check the sender's full email address closely to spot misspellings.\n"
+                     "2. Look out for generic greetings like 'Dear Customer' instead of your real name.\n"
+                     "3. Watch out for urgent or threatening language demanding quick actions.\n"
+                     "4. Hover over links to check where they point before clicking.")
+        else:
+            st.write("Always maintain healthy habits online. Keep your passwords strong, don't share verification codes with anyone, and don't download unverified software attachments from random emails.")
+            
+    st.markdown("---")
+    if st.button("⬅ Back to Dashboard"):
         st.session_state.page = "dashboard"
         st.rerun()
 
 
-# ==========================================
-# 4. UNIFIED SECURE PORTFOLIO FOOTER
-# ==========================================
+# 4. FIXED PROFESSIONAL ACADEMIC FOOTER
+st.markdown("---")
 st.markdown(
     """
-    <div class="soc-footer">
-        <p>SOC Command Simulator Engine v2.4.0 — Operational Environment</p>
-        <p style="color: #38bdf8; font-weight: 500;">Developed by Komalpreet Kaur | BCA Cyber Security Specialist</p>
+    <div style="text-align: center; color: #a1a1aa; font-size: 14px; padding: 10px;">
+        <strong>Project Presentation Portal</strong><br>
+        Developed by: <b>Komalpreet Kaur</b> | Student, BCA Cyber Security
     </div>
     """, 
     unsafe_allow_html=True
