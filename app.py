@@ -1,5 +1,7 @@
 import streamlit as st
 import re
+import sqlite3
+import pandas as pd
 
 # 1. PAGE CONFIGURATION & THEME
 st.set_page_config(
