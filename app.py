@@ -22,6 +22,18 @@ def init_db():
 
 init_db()
 
+def save_scan(tool, user_input, result):
+    conn = sqlite3.connect("cybersecurity.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO scan_history (tool, user_input, result) VALUES (?, ?, ?)",
+        (tool, user_input, result)
+    )
+
+    conn.commit()
+    conn.close()
+
 # 1. PAGE CONFIGURATION & THEME
 st.set_page_config(
     page_title="Cyber Security Assistant",
