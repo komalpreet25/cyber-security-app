@@ -1,7 +1,26 @@
 import streamlit as st
 import re
 import sqlite3
-import pandas as pd
+
+# DATABASE SETUP
+def init_db():
+    conn = sqlite3.connect("cybersecurity.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS scan_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        tool TEXT,
+        user_input TEXT,
+        result TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 # 1. PAGE CONFIGURATION & THEME
 st.set_page_config(
