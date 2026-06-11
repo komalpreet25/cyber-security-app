@@ -284,11 +284,13 @@ elif st.session_state.page == "password":
            result = "Strong Password"
            st.success("✅ Strong Password")
 
-        save_scan(
-          "Password Checker",
-          user_password,
-          result
-        )
+       if st.button("💾 Save To History"):
+           save_scan(
+                "Password Checker",
+                 user_password,
+                 result
+           )
+           st.success("Saved to history successfully!")
             
         # Display Checklist Feedback
         st.write(f"**Score:** {score} out of 4 criteria met")
