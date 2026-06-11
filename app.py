@@ -1,6 +1,7 @@
 import streamlit as st
 import re
 import sqlite3
+import hashlib
 
 # DATABASE SETUP
 def init_db():
@@ -42,6 +43,19 @@ def save_scan(tool, user_input, result):
 
     conn.commit()
     conn.close()
+
+# Session Setup
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+if "user_id" not in st.session_state:
+    st.session_state.user_id = None
+
+if "username" not in st.session_state:
+    st.session_state.username = None
+
+if "page" not in st.session_state:
+    st.session_state.page = "login"
 
 # 1. PAGE CONFIGURATION & THEME
 st.set_page_config(
