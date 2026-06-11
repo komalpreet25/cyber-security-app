@@ -284,7 +284,7 @@ elif st.session_state.page == "password":
            result = "Strong Password"
            st.success("✅ Strong Password")
 
-       save_scan(
+        save_scan(
           "Password Checker",
           user_password,
           result
