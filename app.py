@@ -273,11 +273,22 @@ elif st.session_state.page == "password":
         
         st.subheader("Analysis Results:")
         if score <= 1:
-            st.error("❌ Weak Password")
+           result = "Weak Password"
+           st.error("❌ Weak Password")
+
         elif score <= 3:
-            st.warning("⚠️ Medium Password")
+           result = "Medium Password"
+           st.warning("⚠️ Medium Password")
+
         else:
-            st.success("✅ Strong Password")
+           result = "Strong Password"
+           st.success("✅ Strong Password")
+
+       save_scan(
+          "Password Checker",
+          user_password,
+          result
+        )
             
         # Display Checklist Feedback
         st.write(f"**Score:** {score} out of 4 criteria met")
