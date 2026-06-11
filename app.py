@@ -290,7 +290,7 @@ elif st.session_state.page == "password":
                  user_password,
                  result
             )
-           st.success("Saved to history successfully!")
+            st.success("Saved to history successfully!")
             
         # Display Checklist Feedback
         st.write(f"**Score:** {score} out of 4 criteria met")
