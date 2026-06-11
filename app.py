@@ -44,6 +44,27 @@ def save_scan(tool, user_input, result):
     conn.commit()
     conn.close()
 
+def register_user(username, email, password):
+
+    conn = sqlite3.connect("cybersecurity.db")
+    cursor = conn.cursor()
+
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+
+    try:
+        cursor.execute(
+            "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)",
+            (username, email, password_hash)
+        )
+
+        conn.commit()
+        conn.close()
+        return True
+
+    except:
+        conn.close()
+        return False
+
 # Session Setup
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
