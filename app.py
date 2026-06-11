@@ -512,6 +512,41 @@ elif st.session_state.page == "ai":
         st.session_state.page = "dashboard"
         st.rerun()
 
+# HISTORY PAGE
+elif st.session_state.page == "history":
+
+    st.title("📜 Scan History")
+
+    conn = sqlite3.connect("cybersecurity.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT tool, user_input, result, created_at
+        FROM scan_history
+        ORDER BY id DESC
+    """)
+
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    if rows:
+        for row in rows:
+            st.info(
+                f"🔹 Tool: {row[0]}\n\n"
+                f"Input: {row[1]}\n\n"
+                f"Result: {row[2]}\n\n"
+                f"Date: {row[3]}"
+            )
+    else:
+        st.warning("No scan history available.")
+
+    st.markdown("---")
+
+    if st.button("⬅ Back to Dashboard"):
+        st.session_state.page = "dashboard"
+        st.rerun()
+
 
 # 4. FIXED PROFESSIONAL ACADEMIC FOOTER
 st.markdown("---")
