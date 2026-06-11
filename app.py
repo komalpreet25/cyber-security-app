@@ -113,6 +113,9 @@ with st.sidebar:
     if st.button("AI Assistant", use_container_width=True):
         st.session_state.page = "ai"
         st.rerun()
+    if st.button("📜 Scan History", use_container_width=True):
+    st.session_state.page = "history"
+    st.rerun()    
 
 
 # 3. PAGE LOGIC
