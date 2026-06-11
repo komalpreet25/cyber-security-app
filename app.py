@@ -110,15 +110,16 @@ if "chat_history" not in st.session_state:
 with st.sidebar:
     if not st.session_state.logged_in:
 
-    if st.button("🔑 Login", use_container_width=True):
-        st.session_state.page = "login"
-        st.rerun()
+        if st.button("🔑 Login", use_container_width=True):
+             st.session_state.page = "login"
+             st.rerun()
 
-    if st.button("📝 Register", use_container_width=True):
-        st.session_state.page = "register"
-        st.rerun()
+        if st.button("📝 Register", use_container_width=True):
+             st.session_state.page = "register"
+             st.rerun()
 
-    st.markdown("---")
+        st.markdown("---")
+        
     # High-contrast bright white headings
     st.markdown("<h1 style='color: #FFFFFF; font-weight: 700; margin-bottom: 0px;'>🛡️ Navigation Center</h1>", unsafe_allow_html=True)
     st.markdown("<p style='color: #E5E7EB; margin-top: 5px;'>Select a module below to test its functionality.</p>", unsafe_allow_html=True)
