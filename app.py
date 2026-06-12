@@ -224,6 +224,7 @@ if st.session_state.page == "home":
         st.session_state.page = "dashboard"
         st.rerun()
 
+
 # --- REGISTER PAGE ---
 elif st.session_state.page == "register":
 
@@ -235,27 +236,27 @@ elif st.session_state.page == "register":
 
     if st.button("Create Account"):
 
-      if username and email and password:
+        if username and email and password:
 
-          email_pattern = r"^[a-zA-Z0-9._%+-]+@gmail\.com$"
+            email_pattern = r"^[a-zA-Z0-9._%+-]+@gmail\.com$"
 
-         if not re.match(email_pattern, email):
-            st.error("Please enter a valid Gmail address!")
+            if not re.match(email_pattern, email):
+                st.error("Please enter a valid Gmail address!")
 
-         else:
-            success = register_user(
-               username,
-               email,
-               password
-            )
+            else:
+                success = register_user(
+                    username,
+                    email,
+                    password
+                )
 
-           if success:
-              st.success("Account created successfully!")
-           else:
-              st.error("Username or Email already exists!")
+                if success:
+                    st.success("Account created successfully!")
+                else:
+                    st.error("Username or Email already exists!")
 
-       else:
-           st.warning("Please fill all fields.")
+        else:
+            st.warning("Please fill all fields.")
 
 # --- DASHBOARD PAGE ---
 elif st.session_state.page == "dashboard":
