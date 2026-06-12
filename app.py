@@ -224,6 +224,33 @@ if st.session_state.page == "home":
         st.session_state.page = "dashboard"
         st.rerun()
 
+# --- REGISTER PAGE ---
+elif st.session_state.page == "register":
+
+    st.title("📝 Register")
+
+    username = st.text_input("Username")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Create Account"):
+
+        if username and email and password:
+
+            success = register_user(
+                username,
+                email,
+                password
+            )
+
+            if success:
+                st.success("Account created successfully!")
+            else:
+                st.error("Username or Email already exists!")
+
+        else:
+            st.warning("Please fill all fields.")
+
 # --- DASHBOARD PAGE ---
 elif st.session_state.page == "dashboard":
     # 🚨 FIX PLACED HERE: This keeps your dashboard button labels bright white at all times
